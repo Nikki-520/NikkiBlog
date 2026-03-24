@@ -1,0 +1,210 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+import Placeholder1 from '../assets/blog-placeholder-1.jpg';
+import Placeholder2 from '../assets/blog-placeholder-2.jpg';
+import Placeholder3 from '../assets/blog-placeholder-3.jpg';
+import Placeholder4 from '../assets/blog-placeholder-4.jpg';
+import Placeholder5 from '../assets/blog-placeholder-5.jpg';
+import HomeBg from '../assets/home_bg.jpg';
+
+const placeholders = [Placeholder1, Placeholder2, Placeholder3, Placeholder4, Placeholder5];
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const formatDate = (date: Date) =>
+	new Intl.DateTimeFormat('zh-CN', {
+		year: 'numeric',
+		month: '2-digit',
+		day: '2-digit',
+	}).format(date);
+
+const estimateViews = (seed: string) => {
+	let h = 5381;
+	for (let i = 0; i < seed.length; i += 1) {
+		h = (h * 33) ^ seed.charCodeAt(i);
+	}
+	return 1000 + (Math.abs(h) % 9000);
+};
+
+const normalizeCategory = (raw?: string) => {
+	if (!raw) return '随笔';
+	const map: Record<string, string> = {
+		Essay: '随笔',
+		Essays: '随笔',
+		Note: '笔记',
+		Notes: '笔记',
+		Diary: '日记',
+		Life: '生活',
+	};
+	if (map[raw]) return map[raw];
+	if (/^[A-Za-z0-9 _-]+$/.test(raw)) return '随笔';
+	return raw;
+};
+---
+
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<header class="relative h-screen w-full overflow-hidden">
+			<div class="absolute inset-0">
+				<Image src={HomeBg} alt="" class="w-full h-full object-cover" width={1920} height={1080} />
+			</div>
+			<div class="relative h-full max-w-7xl mx-auto px-8 flex flex-col items-center justify-center text-center">
+				<div class="max-w-2xl space-y-3">
+					<h1 class="text-4xl md:text-6xl font-black font-headline tracking-tighter text-white leading-tight drop-shadow-sm">
+						NikkiBlog
+					</h1>
+					<p id="proverb" class="text-lg md:text-2xl font-medium text-white drop-shadow-sm"></p>
+				</div>
+				<div id="scroll-trigger" class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-60 hover:opacity-100 transition-opacity cursor-pointer">
+					<span class="font-label text-[10px] font-bold tracking-[0.3em] uppercase text-white">
+						SCROLL
+					</span>
+					<span class="material-symbols-outlined text-white text-xl">expand_more</span>
+				</div>
+			</div>
+		</header>
+
+		<main id="articles" class="max-w-6xl mx-auto px-6 md:px-10 lg:px-16 py-20">
+			<div class="space-y-8">
+				{
+					posts.map((post, index) => {
+						const image = post.data.heroImage ?? placeholders[index % placeholders.length];
+						const category = normalizeCategory(post.data.category);
+						const views = estimateViews(post.id);
+						const reverse = index % 2 === 1;
+
+						return (
+							<a
+								href={`/blog/${post.id}/`}
+								class={`grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center group mx-auto bg-surface-container-lowest p-5 md:p-6 rounded-2xl transition-all duration-500 w-full shadow-editorial hover:shadow-deep3d ${
+									reverse ? 'md:text-right' : ''
+								}`}
+							>
+								<div
+									class={`relative overflow-hidden rounded-xl aspect-[16/10] bg-surface-container-low order-1 max-w-[480px] w-full mx-auto ${
+										reverse ? 'md:order-2 md:mr-0' : 'md:ml-0'
+									}`}
+								>
+									<Image
+										src={image}
+										alt=""
+										class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+										width={840}
+										height={525}
+									/>
+									<div class="absolute top-4 left-4">
+										<span class="bg-surface-container-lowest/90 backdrop-blur-md px-3 py-0.5 rounded-full text-[10px] font-bold font-label text-primary tracking-widest">
+											{category}
+										</span>
+									</div>
+								</div>
+								<div
+									class={`space-y-4 order-2 ${
+										reverse ? 'md:order-1 md:items-end md:text-right flex flex-col' : ''
+									}`}
+								>
+									<div class="flex items-center gap-3 text-[10px] font-bold font-label text-outline tracking-[0.2em]">
+										<span>{formatDate(post.data.pubDate)}</span>
+										<span class="w-1 h-1 rounded-full bg-primary-container"></span>
+										<span>访问量 {views}</span>
+									</div>
+									<h2 class="text-2xl md:text-3xl font-extrabold font-headline tracking-tight text-on-background group-hover:text-primary transition-colors leading-tight">
+										{post.data.title}
+									</h2>
+									<p class="text-on-surface-variant text-base leading-relaxed font-medium">
+										{post.data.description}
+									</p>
+									<span class="flex items-center gap-2 text-[11px] font-bold font-label group/btn text-primary">
+										阅读全文
+										<span class="material-symbols-outlined text-base group-hover/btn:translate-x-1 transition-transform">
+											arrow_forward
+										</span>
+									</span>
+								</div>
+							</a>
+						);
+					})
+				}
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<script>
+	(() => {
+		const proverbEl = document.getElementById('proverb');
+		const scrollTrigger = document.getElementById('scroll-trigger');
+		const typeDelay = 80;
+		const pauseDelay = 1200;
+		const startLoop = (text) => {
+			let i = 0;
+			let dir = 1;
+			const loop = () => {
+				if (!proverbEl) return;
+				proverbEl.textContent = text.slice(0, i);
+				if (dir > 0 && i >= text.length) {
+					dir = -1;
+					setTimeout(() => {
+						i += dir;
+						setTimeout(loop, typeDelay);
+					}, pauseDelay);
+					return;
+				}
+				if (dir < 0 && i <= 0) {
+					dir = 1;
+					setTimeout(() => {
+						i += dir;
+						setTimeout(loop, typeDelay);
+					}, pauseDelay);
+					return;
+				}
+				i += dir;
+				setTimeout(loop, typeDelay);
+			};
+			loop();
+		};
+		const init = async () => {
+			const key = 'proverbCache';
+			const today = new Date().toISOString().slice(0, 10);
+			let text = '行到水穷处，坐看云起时';
+			try {
+				const raw = localStorage.getItem(key);
+				const cached = raw ? JSON.parse(raw) : null;
+				if (cached && cached.date === today && cached.msg) {
+					text = cached.msg;
+				} else {
+					const res = await fetch('https://apis.jxcxin.cn/api/yiyan?type=json', { cache: 'no-store' });
+					if (res.ok) {
+						const data = await res.json();
+						if (data && data.msg) text = data.msg;
+					}
+					try {
+						localStorage.setItem(key, JSON.stringify({ date: today, msg: text }));
+					} catch {}
+				}
+			} catch {}
+			startLoop(text);
+		};
+		init();
+		if (scrollTrigger) {
+			scrollTrigger.addEventListener('click', () => {
+				const target = document.getElementById('articles');
+				if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+			});
+		}
+	})();
+</script>

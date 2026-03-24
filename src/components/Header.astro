@@ -1,0 +1,54 @@
+---
+import { SITE_TITLE } from '../consts';
+---
+
+<nav data-nav class="fixed top-0 w-full z-50 bg-transparent transition-colors duration-300">
+	<div class="flex items-center justify-between px-0 md:px-4 py-2 w-full">
+		<a href="/" data-color-toggle class="text-2xl font-black text-white tracking-tighter drop-shadow-sm font-headline">{SITE_TITLE}</a>
+		<div class="hidden md:flex items-center justify-end gap-10">
+			<a
+				data-color-toggle
+				class="text-white font-label text-sm font-extrabold tracking-widest drop-shadow-sm transition-opacity hover:opacity-80"
+				href="/"
+			>
+				日志
+			</a>
+			<a
+				data-color-toggle
+				class="text-white font-label text-sm font-extrabold tracking-widest drop-shadow-sm transition-opacity hover:opacity-80"
+				href="/blog"
+			>
+				归档
+			</a>
+			<a
+				data-color-toggle
+				class="text-white font-label text-sm font-extrabold tracking-widest drop-shadow-sm transition-opacity hover:opacity-80"
+				href="/about"
+			>
+				关于
+			</a>
+		</div>
+	</div>
+</nav>
+
+<script>
+	(() => {
+		const nav = document.querySelector('[data-nav]');
+		const applyGlass = () => {
+			if (!nav) return;
+			const scrolled = window.scrollY > 8;
+			const add = ['backdrop-blur-[16px]', 'bg-white/70', 'shadow-editorial'];
+			const remove = ['bg-transparent'];
+			add.forEach((c) => nav.classList.toggle(c, scrolled));
+			remove.forEach((c) => nav.classList.toggle(c, !scrolled));
+
+			const toggles = document.querySelectorAll('[data-color-toggle]');
+			toggles.forEach((el) => {
+				el.classList.toggle('text-black', scrolled);
+				el.classList.toggle('text-white', !scrolled);
+			});
+		};
+		applyGlass();
+		window.addEventListener('scroll', applyGlass, { passive: true });
+	})();
+</script>

@@ -1,0 +1,37 @@
+---
+const today = new Date();
+import { SITE_TITLE } from '../consts';
+---
+
+<footer class="w-full py-12 bg-zinc-50 transition-colors duration-300 border-t border-surface-container">
+	<div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto space-y-6 md:space-y-0">
+		<div class="text-lg font-bold text-zinc-900 font-headline tracking-tight">
+			{SITE_TITLE}
+		</div>
+		<div class="flex flex-col items-center md:items-end space-y-4">
+			<div class="flex gap-8">
+				<a
+					class="text-zinc-500 hover:text-primary transition-colors font-label text-xs tracking-wide"
+					href="#"
+				>
+					隐私
+				</a>
+				<a
+					class="text-zinc-500 hover:text-primary transition-colors font-label text-xs tracking-wide"
+					href="#"
+				>
+					条款
+				</a>
+				<a
+					class="text-zinc-500 hover:text-primary transition-colors font-label text-xs tracking-wide"
+					href="/rss.xml"
+				>
+					订阅
+				</a>
+			</div>
+			<div class="text-zinc-500 font-label text-[10px] tracking-widest">
+				© {today.getFullYear()} Nikki。以光影为笔，记录灵感。
+			</div>
+		</div>
+	</div>
+</footer>

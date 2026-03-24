@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>萤火之森：我的次元日记</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Manrope & Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Plus_Jakarta_Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#00A3FF",
+              "on-primary-fixed-variant": "#0082cc",
+              "surface-container-low": "#f5f3f4",
+              "on-background": "#313334",
+              "on-secondary": "#f4faff",
+              "primary-container": "#e0f2ff",
+              "surface-tint": "#00A3FF",
+              "inverse-on-surface": "#9d9d9e",
+              "surface-container-high": "#e8e8ea",
+              "surface-container": "#eeedef",
+              "inverse-surface": "#0d0e0f",
+              "surface-container-lowest": "#ffffff",
+              "on-primary-fixed": "#003b5c",
+              "secondary-fixed": "#c2e8ff",
+              "surface-variant": "#e2e2e4",
+              "on-tertiary": "#faf8ff",
+              "background": "#fbf9fa",
+              "surface": "#fbf9fa",
+              "on-primary-container": "#004063",
+              "inverse-primary": "#80d1ff",
+              "primary-fixed-dim": "#80d1ff",
+              "on-surface-variant": "#5e5f61",
+              "error": "#ac3149",
+              "primary-dim": "#0082cc",
+              "outline": "#7a7b7d",
+              "secondary-container": "#c2e8ff",
+              "secondary": "#006789",
+              "outline-variant": "#b1b2b4",
+              "on-surface": "#313334",
+              "surface-container-highest": "#e2e2e4",
+              "on-primary": "#ffffff",
+              "surface-dim": "#d9dadc",
+              "primary-fixed": "#e0f2ff",
+              "surface-bright": "#fbf9fa",
+              "on-error": "#fff7f7"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Manrope"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-shadow {
+            box-shadow: 0 12px 32px rgba(0, 163, 255, 0.08);
+        }
+        .deep-3d-shadow {
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.15), 0 18px 36px -18px rgba(0, 0, 0, 0.2);
+        }
+        .deep-3d-shadow:hover {
+            box-shadow: 0 50px 100px -20px rgba(0, 163, 255, 0.25), 0 30px 60px -30px rgba(0, 0, 0, 0.3);
+        }
+        .glass-nav {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="text-on-background font-body selection:bg-primary-container selection:text-on-primary-container bg-white">
+<!-- TopNavBar -->
+<nav class="sticky top-0 w-full z-50 bg-white/70 dark:bg-zinc-900/70 glass-nav transition-colors duration-300 shadow-[0_12px_32px_rgba(0,163,255,0.08)]">
+<div class="flex justify-between items-center px-8 py-6 max-w-7xl mx-auto">
+<div class="text-2xl font-black text-[#00A3FF] dark:text-[#00A3FF] tracking-tighter font-headline">
+            Sakura Editorial
+        </div>
+<div class="hidden md:flex items-center gap-10">
+<a class="text-[#00A3FF] dark:text-[#00A3FF] border-b-2 border-blue-100 dark:border-blue-900 pb-1 font-label text-sm font-bold tracking-wide" href="#">Journal</a>
+<a class="text-zinc-500 dark:text-zinc-400 hover:text-[#00A3FF] transition-colors font-label text-sm font-bold tracking-wide" href="#">Archives</a>
+<a class="text-zinc-500 dark:text-zinc-400 hover:text-[#00A3FF] transition-colors font-label text-sm font-bold tracking-wide" href="#">About</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:opacity-80 transition-opacity active:scale-95 duration-200 text-[#00A3FF]">
+<span class="material-symbols-outlined">light_mode</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<header class="relative h-[80vh] w-full overflow-hidden">
+<div class="absolute inset-0">
+<img alt="Hero Image" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0uj8GLqZyIIaxIehV712usXxW9qrnEpReF4QvuCV9QfXYvkBJYz5PYpG5ndrwdufoCnzIWM9PxN3JbX_MEu0kW_UPIiGCsXuYUETy2UTCoYG7eJ0xpOjik8poGeoKjzCjZZTlALBhBnhCRcSTl9tnfHAVh0GqIwSjy-zaMc8CvLxkCeL8qmu3VjO21FLhxWUc4KSbHpM8BMf_a7OlEKHftfBEeNAravDNykmOj-Glb5iZrbcL_5mvj7ZU9CwmgEfeV-j1pwYwtY0tmA"/>
+<div class="absolute inset-0 bg-background/20 backdrop-blur-[1px]"></div>
+</div>
+<div class="relative h-full max-w-7xl mx-auto px-8 flex flex-col items-center justify-center text-center">
+<div class="max-w-md space-y-4">
+<span class="inline-block px-4 py-1.5 rounded-full bg-primary-container text-on-primary-container font-label text-[10px] font-bold tracking-[0.2em] uppercase">FEATURED STORY</span>
+<h1 class="text-3xl md:text-5xl font-black font-headline tracking-tighter text-on-background leading-tight">
+                萤火之森：我的次元日记
+            </h1>
+<p class="text-base text-on-surface-variant font-medium mx-auto max-w-sm leading-relaxed">
+                在光影交错的二次元世界里，寻找那些触动灵魂的瞬间与温暖的治愈。
+            </p>
+</div>
+<div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-60 hover:opacity-100 transition-opacity cursor-pointer">
+<span class="font-label text-[10px] font-bold tracking-[0.3em] uppercase text-on-surface-variant">SCROLL</span>
+<span class="material-symbols-outlined text-primary text-xl">expand_more</span>
+</div>
+</div>
+</header>
+<!-- Article List Section -->
+<main class="max-w-7xl mx-auto px-8 lg:px-48 py-24 space-y-12">
+<div>
+<!-- Post Item 1 -->
+<article class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center group cursor-pointer mx-auto bg-white dark:bg-zinc-900 p-6 md:p-8 rounded-2xl transition-all duration-500 max-w-6xl deep-3d-shadow mb-12">
+<div class="relative overflow-hidden rounded-xl aspect-[16/10] bg-surface-container-low order-1 max-w-[420px] w-full mx-auto md:ml-0">
+<img alt="Anime Spring 2024" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSBKTAVqZCCTP5ntmaC3DXclEWf-WaFz1_KifVnvavpGqhF28pb2SUX4CiSS09b8wO13u2InYKuwTPAk5q9Uvqp_eAWkB6KxFgKGuPx7amXJJ5gZIy0TlEUvMYWZ_P563xeXYA-4mRlSAF0J9Z8EyEPGy-mi1diL13U3e6d1-ldqhlfbjjldaPZq22Or_dNwR-WySCutejoUev9_LVdIMBLT9QQWGIjDZdNDyW8TPlzRJLZoSNeV1NSN1SGlqDQ09hatRdupdGGVy_"/>
+<div class="absolute top-4 left-4">
+<span class="bg-surface-container-lowest/90 backdrop-blur-md px-3 py-0.5 rounded-full text-[9px] font-bold font-label text-primary tracking-widest uppercase">CRITIQUE</span>
+</div>
+</div>
+<div class="space-y-4 order-2">
+<div class="flex items-center gap-3 text-[9px] font-bold font-label text-outline uppercase tracking-[0.2em]">
+<span>April 12, 2024</span>
+<span class="w-1 h-1 rounded-full bg-primary-container"></span>
+<span>12 Min Read</span>
+</div>
+<h2 class="text-2xl md:text-3xl font-extrabold font-headline tracking-tight text-on-background group-hover:text-primary transition-colors leading-tight">
+                    关于2024年春季新番的深度漫谈
+                </h2>
+<p class="text-on-surface-variant text-base leading-relaxed font-medium">
+                    本季番剧在视觉表现与叙事节奏上呈现出了惊人的多样性。从制作委员会的变迁到画风的回潮。
+                </p>
+<button class="flex items-center gap-2 text-[11px] font-bold font-label group/btn text-[#00A3FF]">
+                    READ FULL STORY
+                    <span class="material-symbols-outlined text-base group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Post Item 2 -->
+<article class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center group cursor-pointer mx-auto bg-white dark:bg-zinc-900 p-6 md:p-8 rounded-2xl transition-all duration-500 max-w-6xl deep-3d-shadow mb-12">
+<div class="relative overflow-hidden rounded-xl aspect-[16/10] bg-surface-container-low order-1 md:order-2 max-w-[420px] w-full mx-auto md:mr-0">
+<img alt="Artist Interview" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9DuW12MKjHMcCNVDn8SO56YxZdQRDAT-rvJTWL1g08DNLzwKSP6WMJOd_KIm42NL1FeFyQ7onKwBWcQjn0d_QrTsL3Ijr0nbcTWKQwEY9SaTNjBxfBsP4M_T8BY-zxiVQrIG9NOXCUi-ttZFyq0Gb9PGQJvMaAIhXzPHp3FGWn4ca2r0dwRCqEa43TlxETjpf4qiJe3_ZCJUnJoyO041s_la382Eo1AIyH4aXr5yHWlEO2xl_XwMTj_QsolgbQqc4qJRJAw54twZD"/>
+<div class="absolute top-4 left-4">
+<span class="bg-surface-container-lowest/90 backdrop-blur-md px-3 py-0.5 rounded-full text-[9px] font-bold font-label text-primary tracking-widest uppercase">INTERVIEW</span>
+</div>
+</div>
+<div class="space-y-4 order-2 md:order-1 md:text-right flex flex-col md:items-end">
+<div class="flex items-center gap-3 text-[9px] font-bold font-label text-outline uppercase tracking-[0.2em]">
+<span>April 08, 2024</span>
+<span class="w-1 h-1 rounded-full bg-primary-container"></span>
+<span>8 Min Read</span>
+</div>
+<h2 class="text-2xl md:text-3xl font-extrabold font-headline tracking-tight text-on-background group-hover:text-primary transition-colors leading-tight">
+                    画师访谈：光影中的二次元美学
+                </h2>
+<p class="text-on-surface-variant text-base leading-relaxed font-medium">
+                    独家对话知名概念画师，探讨如何通过细腻的色彩层叠与光源处理营造叙事感。
+                </p>
+<button class="flex items-center gap-2 text-[11px] font-bold font-label group/btn text-[#00A3FF]">
+                    READ FULL STORY
+                    <span class="material-symbols-outlined text-base group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Post Item 3 -->
+<article class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center group cursor-pointer mx-auto bg-white dark:bg-zinc-900 p-6 md:p-8 rounded-2xl transition-all duration-500 max-w-6xl deep-3d-shadow">
+<div class="relative overflow-hidden rounded-xl aspect-[16/10] bg-surface-container-low order-1 max-w-[420px] w-full mx-auto md:ml-0">
+<img alt="Healing Narrative" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUZcPR79q-CORDCGwoBylp1Gex64JicowIxKz4-5shBj28nG34XlW9X1VChI_7R_4Aw5Yiwf77hS8Zlis0I-xsOfJu1b0GcBAiKtzSXwn85wORIH9UG7y7JWOWb4cOnFhTHCeaDYkFjbvg18MtFKHOKTMuIt00--GYRzNnbkydUZwAfHlA3FV0qDP1rtJRj0P0TKFhe4qrqTBLv7rEAAEEW0zuhFdCXiZV3XibbKUFgOCegn293w3WCS3zaSkGxz3rccUE6hj04NXS"/>
+<div class="absolute top-4 left-4">
+<span class="bg-surface-container-lowest/90 backdrop-blur-md px-3 py-0.5 rounded-full text-[9px] font-bold font-label text-primary tracking-widest uppercase">ESSAY</span>
+</div>
+</div>
+<div class="space-y-4 order-2">
+<div class="flex items-center gap-3 text-[9px] font-bold font-label text-outline uppercase tracking-[0.2em]">
+<span>April 05, 2024</span>
+<span class="w-1 h-1 rounded-full bg-primary-container"></span>
+<span>15 Min Read</span>
+</div>
+<h2 class="text-2xl md:text-3xl font-extrabold font-headline tracking-tight text-on-background group-hover:text-primary transition-colors leading-tight">
+                    从《夏目友人帐》看现代治愈系叙事
+                </h2>
+<p class="text-on-surface-variant text-base leading-relaxed font-medium">
+                    在快节奏的时代背景下，如何凭借极柔和的语调触及观众内心深处的温柔。
+                </p>
+<button class="flex items-center gap-2 text-[11px] font-bold font-label group/btn text-[#00A3FF]">
+                    READ FULL STORY
+                    <span class="material-symbols-outlined text-base group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</article>
+</div>
+<!-- Pagination Section -->
+<nav aria-label="Pagination" class="flex justify-center items-center gap-2 mt-20 max-w-5xl mx-auto pb-12">
+<div class="flex items-center gap-3">
+<a class="w-12 h-12 flex items-center justify-center rounded-xl bg-white dark:bg-zinc-800 text-zinc-400 shadow-sm hover:shadow-md transition-all" href="#">
+<span class="material-symbols-outlined text-xl text-[#00A3FF]">chevron_left</span>
+</a>
+<div class="flex items-center gap-3">
+<a class="w-12 h-12 flex items-center justify-center rounded-xl bg-[#00A3FF] text-white font-bold shadow-lg shadow-[#00A3FF]/30" href="#">1</a>
+<a class="w-12 h-12 flex items-center justify-center rounded-xl bg-white dark:bg-zinc-800 text-zinc-500 font-bold shadow-sm hover:shadow-md transition-all" href="#">2</a>
+<a class="w-12 h-12 flex items-center justify-center rounded-xl bg-white dark:bg-zinc-800 text-zinc-500 font-bold shadow-sm hover:shadow-md transition-all" href="#">3</a>
+<span class="w-12 h-12 flex items-center justify-center text-zinc-400">...</span>
+<a class="w-12 h-12 flex items-center justify-center rounded-xl bg-white dark:bg-zinc-800 text-zinc-500 font-bold shadow-sm hover:shadow-md transition-all" href="#">12</a>
+</div>
+<a class="w-12 h-12 flex items-center justify-center rounded-xl bg-white dark:bg-zinc-800 text-[#00A3FF] shadow-sm hover:shadow-md transition-all" href="#">
+<span class="material-symbols-outlined text-xl font-bold text-[#00A3FF]">chevron_right</span>
+</a>
+</div>
+</nav>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 bg-zinc-50 dark:bg-zinc-950 transition-colors duration-300 border-t border-surface-container">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto space-y-6 md:space-y-0">
+<div class="text-lg font-bold text-zinc-900 dark:text-zinc-100 font-headline tracking-tight">
+            Sakura Editorial
+        </div>
+<div class="flex flex-col items-center md:items-end space-y-4">
+<div class="flex gap-8">
+<a class="text-zinc-400 dark:text-zinc-600 hover:text-[#00A3FF] transition-colors font-label text-xs tracking-wide uppercase" href="#">Privacy</a>
+<a class="text-zinc-400 dark:text-zinc-600 hover:text-[#00A3FF] transition-colors font-label text-xs tracking-wide uppercase" href="#">Terms</a>
+<a class="text-zinc-400 dark:text-zinc-600 hover:text-[#00A3FF] transition-colors font-label text-xs tracking-wide uppercase" href="#">RSS</a>
+</div>
+<div class="text-zinc-400 dark:text-zinc-600 font-label text-[10px] tracking-widest uppercase">
+                © 2024 Sakura Editorial. Designed with ethereal light.
+            </div>
+</div>
+</div>
+</footer>
+</body></html>
