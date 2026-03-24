@@ -9,10 +9,11 @@
 
 	html {
 		@apply font-body;
+		scroll-padding-top: 5rem;
 	}
 
 	body {
-		@apply bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container;
+		@apply bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container overflow-x-hidden;
 	}
 
 	.material-symbols-outlined {
@@ -21,6 +22,10 @@
 }
 
 @layer components {
+	.article-prose {
+		@apply break-words;
+	}
+
 	.article-prose h2 {
 		@apply text-3xl md:text-4xl font-headline font-bold pt-12 pb-4 tracking-tight text-primary;
 	}
@@ -68,7 +73,20 @@
 	}
 
 	.article-prose :where(img) {
-		@apply rounded-2xl;
+		@apply rounded-2xl max-w-full h-auto;
+	}
+
+	.article-prose :where(table) {
+		@apply block max-w-full overflow-x-auto;
+	}
+
+	.article-prose table {
+		@apply w-full border-collapse;
+	}
+
+	.article-prose th,
+	.article-prose td {
+		@apply border border-zinc-200 dark:border-zinc-700 px-3 py-2 align-top;
 	}
 }
 

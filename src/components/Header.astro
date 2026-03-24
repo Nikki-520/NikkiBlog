@@ -3,7 +3,7 @@ import { SITE_TITLE } from '../consts';
 ---
 
 <nav data-nav class="fixed top-0 w-full z-50 bg-transparent transition-colors duration-300">
-	<div class="flex items-center justify-between px-0 md:px-4 py-2 w-full">
+	<div class="flex items-center justify-between px-4 py-2 w-full">
 		<a href="/" data-color-toggle class="text-2xl font-black text-white tracking-tighter drop-shadow-sm font-headline">{SITE_TITLE}</a>
 		<div class="hidden md:flex items-center justify-end gap-10">
 			<a
@@ -28,12 +28,89 @@ import { SITE_TITLE } from '../consts';
 				关于
 			</a>
 		</div>
+		<button
+			type="button"
+			data-menu-button
+			data-color-toggle
+			class="md:hidden inline-flex items-center justify-center p-2 rounded-xl transition-opacity hover:opacity-80 active:opacity-70"
+			aria-label="打开菜单"
+			aria-expanded="false"
+			aria-controls="mobile-menu"
+		>
+			<span class="material-symbols-outlined text-2xl">menu</span>
+		</button>
 	</div>
 </nav>
+
+<div data-menu-root class="md:hidden hidden fixed inset-0 z-[60]" aria-hidden="true">
+	<div data-menu-overlay class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-200"></div>
+	<div
+		id="mobile-menu"
+		data-menu-panel
+		class="absolute top-0 right-0 h-full w-72 max-w-[85vw] bg-surface-container-lowest shadow-deep3d translate-x-full transition-transform duration-200"
+	>
+		<div class="p-6 flex items-center justify-between">
+			<div class="text-lg font-black tracking-tighter font-headline text-on-background">
+				{SITE_TITLE}
+			</div>
+			<button
+				type="button"
+				data-menu-close
+				class="inline-flex items-center justify-center p-2 rounded-xl text-on-background transition-opacity hover:opacity-80 active:opacity-70"
+				aria-label="关闭菜单"
+			>
+				<span class="material-symbols-outlined text-2xl">close</span>
+			</button>
+		</div>
+		<nav class="px-6 pb-10 flex flex-col gap-3">
+			<a class="py-3 text-base font-label font-extrabold tracking-widest text-on-background" href="/">
+				日志
+			</a>
+			<a class="py-3 text-base font-label font-extrabold tracking-widest text-on-background" href="/blog">
+				归档
+			</a>
+			<a class="py-3 text-base font-label font-extrabold tracking-widest text-on-background" href="/about">
+				关于
+			</a>
+		</nav>
+	</div>
+</div>
 
 <script>
 	(() => {
 		const nav = document.querySelector('[data-nav]');
+		const menuRoot = document.querySelector('[data-menu-root]');
+		const menuOverlay = document.querySelector('[data-menu-overlay]');
+		const menuPanel = document.querySelector('[data-menu-panel]');
+		const menuButton = document.querySelector('[data-menu-button]');
+		const menuClose = document.querySelector('[data-menu-close]');
+
+		const openMenu = () => {
+			if (!menuRoot || !menuOverlay || !menuPanel || !menuButton) return;
+			menuRoot.classList.remove('hidden');
+			menuRoot.setAttribute('aria-hidden', 'false');
+			menuButton.setAttribute('aria-expanded', 'true');
+			document.body.classList.add('overflow-hidden');
+			requestAnimationFrame(() => {
+				menuOverlay.classList.remove('opacity-0');
+				menuOverlay.classList.add('opacity-100');
+				menuPanel.classList.remove('translate-x-full');
+			});
+		};
+
+		const closeMenu = () => {
+			if (!menuRoot || !menuOverlay || !menuPanel || !menuButton) return;
+			menuRoot.setAttribute('aria-hidden', 'true');
+			menuButton.setAttribute('aria-expanded', 'false');
+			document.body.classList.remove('overflow-hidden');
+			menuOverlay.classList.add('opacity-0');
+			menuOverlay.classList.remove('opacity-100');
+			menuPanel.classList.add('translate-x-full');
+			window.setTimeout(() => {
+				menuRoot.classList.add('hidden');
+			}, 210);
+		};
+
 		const applyGlass = () => {
 			if (!nav) return;
 			const scrolled = window.scrollY > 8;
@@ -50,5 +127,19 @@ import { SITE_TITLE } from '../consts';
 		};
 		applyGlass();
 		window.addEventListener('scroll', applyGlass, { passive: true });
+
+		if (menuButton) menuButton.addEventListener('click', openMenu);
+		if (menuClose) menuClose.addEventListener('click', closeMenu);
+		if (menuOverlay) menuOverlay.addEventListener('click', closeMenu);
+		if (menuRoot) {
+			menuRoot.addEventListener('click', (e) => {
+				const target = e.target;
+				if (!(target instanceof HTMLElement)) return;
+				if (target.closest('a')) closeMenu();
+			});
+		}
+		window.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape') closeMenu();
+		});
 	})();
 </script>
