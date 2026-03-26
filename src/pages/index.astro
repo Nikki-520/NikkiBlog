@@ -59,7 +59,10 @@ const normalizeCategory = (raw?: string) => {
 					<h1 class="text-4xl md:text-6xl font-black font-headline tracking-tighter text-white leading-tight drop-shadow-sm">
 						NikkiBlog
 					</h1>
-					<p id="proverb" class="text-lg md:text-2xl font-medium text-white drop-shadow-sm"></p>
+					<p
+						id="proverb"
+						class="text-lg md:text-2xl font-medium text-white drop-shadow-sm min-h-[1.75rem] md:min-h-[2.25rem]"
+					></p>
 				</div>
 				<div id="scroll-trigger" class="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-60 hover:opacity-100 transition-opacity cursor-pointer">
 					<span class="font-label text-[10px] font-bold tracking-[0.3em] uppercase text-white">
@@ -182,7 +185,7 @@ const normalizeCategory = (raw?: string) => {
 			let dir = 1;
 			const loop = () => {
 				if (!proverbEl) return;
-				proverbEl.textContent = text.slice(0, i);
+				proverbEl.textContent = text.slice(0, i) || '\u00A0';
 				if (dir > 0 && i >= text.length) {
 					dir = -1;
 					setTimeout(() => {

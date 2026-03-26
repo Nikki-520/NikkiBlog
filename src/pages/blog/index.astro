@@ -1,3 +1,109 @@
 ---
-return Astro.redirect('/');
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { SITE_TITLE } from '../../consts';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const formatDate = (date: Date) =>
+	new Intl.DateTimeFormat('zh-CN', {
+		year: 'numeric',
+		month: '2-digit',
+		day: '2-digit',
+	}).format(date);
+
+const byYear = posts.reduce((acc, post) => {
+	const year = String(post.data.pubDate.getFullYear());
+	if (!acc.has(year)) acc.set(year, []);
+	acc.get(year)?.push(post);
+	return acc;
+}, new Map<string, typeof posts>());
 ---
+
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<BaseHead title={`归档 - ${SITE_TITLE}`} description="全部文章归档" />
+	</head>
+	<body>
+		<Header />
+		<main class="max-w-6xl mx-auto px-6 md:px-10 lg:px-16 pt-28 pb-24">
+			<section class="bg-surface-container-lowest rounded-3xl p-7 md:p-10 shadow-deepElevation">
+				<div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+					<div>
+						<p class="font-label text-[11px] tracking-[0.24em] text-outline font-bold">ARCHIVE</p>
+						<h1 class="mt-3 text-4xl md:text-5xl font-headline font-black tracking-tight text-on-background">
+							文章归档
+						</h1>
+						<p class="mt-4 text-on-surface-variant text-base md:text-lg">
+							按时间顺序整理的全部文章列表。
+						</p>
+					</div>
+					<div class="flex items-center gap-3">
+						<div class="bg-surface-container-low rounded-xl px-4 py-3 min-w-[110px] text-center">
+							<p class="font-label text-[10px] tracking-[0.18em] text-outline">文章总数</p>
+							<p class="mt-1 text-xl font-headline font-extrabold text-on-background">{posts.length}</p>
+						</div>
+						<div class="bg-surface-container-low rounded-xl px-4 py-3 min-w-[110px] text-center">
+							<p class="font-label text-[10px] tracking-[0.18em] text-outline">年份</p>
+							<p class="mt-1 text-xl font-headline font-extrabold text-on-background">{byYear.size}</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="mt-10 space-y-10">
+				{
+					Array.from(byYear.entries()).map(([year, items]) => (
+						<div class="bg-surface-container-lowest rounded-2xl p-6 md:p-8 shadow-editorial">
+							<div class="flex items-center justify-between border-b border-surface-container pb-4">
+								<h2 class="text-2xl md:text-3xl font-headline font-extrabold tracking-tight text-on-background">
+									{year}
+								</h2>
+								<span class="font-label text-[11px] tracking-[0.18em] text-outline">
+									{items.length} 篇
+								</span>
+							</div>
+							<ul class="mt-4 divide-y divide-surface-container">
+								{
+									items.map((post) => (
+										<li class="py-4">
+											<a
+												href={`/blog/${post.id}/`}
+												class="group flex flex-col md:flex-row md:items-center md:justify-between gap-3"
+											>
+												<div class="min-w-0">
+													<p class="text-on-background text-lg md:text-xl font-headline font-bold group-hover:text-primary transition-colors break-words">
+														{post.data.title}
+													</p>
+													<p class="mt-1 text-sm text-on-surface-variant">{post.data.description}</p>
+												</div>
+												<div class="flex items-center gap-3 shrink-0">
+													<span class="text-[11px] font-label font-bold tracking-[0.14em] text-outline">
+														{formatDate(post.data.pubDate)}
+													</span>
+													<span class="w-1 h-1 rounded-full bg-primary-container"></span>
+													<span class="text-[11px] font-label font-bold tracking-[0.14em] text-outline">
+														2 min
+													</span>
+													<span class="material-symbols-outlined text-base text-primary group-hover:translate-x-1 transition-transform">
+														arrow_forward
+													</span>
+												</div>
+											</a>
+										</li>
+									))
+								}
+							</ul>
+						</div>
+					))
+				}
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
