@@ -1,3 +1,118 @@
 ---
-return Astro.redirect('/');
+import { Image } from 'astro:assets';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+import HomeBg from '../assets/home_bg.jpg';
+import Avatar from '../assets/blog-placeholder-about.jpg';
+
+const pageTitle = `关于 - ${SITE_TITLE}`;
+const pageDescription = '关于我、联系方式与本站说明。';
 ---
+
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<BaseHead title={pageTitle} description={pageDescription} image={Avatar} />
+	</head>
+	<body>
+		<Header />
+		<header class="relative w-full h-[52vh] md:h-[60vh] overflow-hidden">
+			<Image src={HomeBg} alt="" class="w-full h-full object-cover" width={1920} height={1080} />
+			<div class="absolute inset-0 bg-black/20"></div>
+			<div class="absolute inset-0 max-w-6xl mx-auto px-6 md:px-10 lg:px-16 flex items-end pb-12 md:pb-16">
+				<div>
+					<span class="inline-flex items-center px-4 py-1.5 rounded-full font-label text-[10px] font-bold tracking-[0.2em] bg-primary-container text-on-primary-container">
+						ABOUT
+					</span>
+					<h1 class="mt-6 text-4xl md:text-6xl font-headline font-extrabold text-white tracking-tighter drop-shadow-sm">
+						关于我
+					</h1>
+				</div>
+			</div>
+		</header>
+
+		<main class="max-w-6xl mx-auto px-6 md:px-10 lg:px-16 py-20 md:py-24">
+			<section class="bg-surface-container-lowest rounded-3xl shadow-deepElevation p-6 sm:p-10 md:p-14">
+				<div class="grid grid-cols-1 lg:grid-cols-[auto,1fr] gap-8 md:gap-10 items-center">
+					<div class="mx-auto lg:mx-0">
+						<div class="w-36 h-36 md:w-44 md:h-44 rounded-full overflow-hidden ring-4 ring-primary-container shadow-editorial">
+							<Image src={Avatar} alt="Nikki 头像" class="w-full h-full object-cover" width={360} height={360} />
+						</div>
+					</div>
+					<div class="space-y-4 text-center lg:text-left">
+						<h2 class="text-3xl md:text-4xl font-headline font-extrabold tracking-tight text-on-background">
+							Nikki
+						</h2>
+						<p class="text-on-surface-variant text-base md:text-lg leading-relaxed font-medium">
+							你好，我是 Nikki。这里记录我的生活、思考和创作片段，也分享一些值得反复阅读的内容。
+						</p>
+						<p class="text-on-surface-variant text-base md:text-lg leading-relaxed font-medium">
+							希望这个小站可以成为一处安静、长期更新的个人角落。
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-5">
+				<a
+					href="mailto:hello@nikki.blog"
+					class="group bg-surface-container-lowest rounded-2xl p-6 shadow-editorial hover:shadow-deep3d transition-all duration-300"
+				>
+					<div class="flex items-center gap-3 text-primary">
+						<span class="material-symbols-outlined text-2xl">mail</span>
+						<span class="font-label text-xs tracking-[0.16em] font-bold">EMAIL</span>
+					</div>
+					<p class="mt-4 text-on-background text-sm md:text-base font-semibold break-all">
+						hello@nikki.blog
+					</p>
+				</a>
+				<a
+					href="https://github.com/"
+					target="_blank"
+					rel="noreferrer"
+					class="group bg-surface-container-lowest rounded-2xl p-6 shadow-editorial hover:shadow-deep3d transition-all duration-300"
+				>
+					<div class="flex items-center gap-3 text-primary">
+						<span class="material-symbols-outlined text-2xl">code</span>
+						<span class="font-label text-xs tracking-[0.16em] font-bold">GITHUB</span>
+					</div>
+					<p class="mt-4 text-on-background text-sm md:text-base font-semibold break-all">
+						github.com/nikki
+					</p>
+				</a>
+				<a
+					href="/rss.xml"
+					class="group bg-surface-container-lowest rounded-2xl p-6 shadow-editorial hover:shadow-deep3d transition-all duration-300"
+				>
+					<div class="flex items-center gap-3 text-primary">
+						<span class="material-symbols-outlined text-2xl">rss_feed</span>
+						<span class="font-label text-xs tracking-[0.16em] font-bold">RSS</span>
+					</div>
+					<p class="mt-4 text-on-background text-sm md:text-base font-semibold break-all">
+						订阅本站更新
+					</p>
+				</a>
+			</section>
+
+			<section class="mt-10 bg-surface-container-lowest rounded-3xl shadow-editorial p-6 sm:p-10 md:p-12">
+				<h3 class="text-2xl md:text-3xl font-headline font-extrabold tracking-tight text-on-background">
+					关于本站
+				</h3>
+				<div class="mt-5 space-y-4 text-on-surface-variant text-base md:text-lg leading-relaxed font-medium">
+					<p>
+						这个站点是一个轻量、以内容为中心的个人博客，保留简洁的结构和清晰的阅读体验。
+					</p>
+					<p>
+						首页用于展示最新文章和精选内容，文章页以长文阅读为核心，关于页则集中介绍作者与站点信息。
+					</p>
+					<p>
+						站点持续更新中，欢迎通过联系方式交流你的建议与想法。
+					</p>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

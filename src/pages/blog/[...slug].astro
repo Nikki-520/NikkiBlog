@@ -7,14 +7,6 @@ export async function getStaticPaths() {
 		(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 	);
 
-	const estimateViews = (seed: string) => {
-		let h = 5381;
-		for (let i = 0; i < seed.length; i += 1) {
-			h = (h * 33) ^ seed.charCodeAt(i);
-		}
-		return 1000 + (Math.abs(h) % 9000);
-	};
-
 	return posts.map((post, index) => {
 		const prevPost = posts[index + 1];
 		const nextPost = posts[index - 1];
@@ -23,7 +15,7 @@ export async function getStaticPaths() {
 			params: { slug: post.id },
 			props: {
 				post,
-				views: estimateViews(post.id),
+				readingTime: '2 min',
 				prev: prevPost ? { id: prevPost.id, title: prevPost.data.title } : undefined,
 				next: nextPost ? { id: nextPost.id, title: nextPost.data.title } : undefined,
 			},
@@ -32,15 +24,20 @@ export async function getStaticPaths() {
 }
 type Props = {
 	post: CollectionEntry<'blog'>;
-	views: number;
+	readingTime: string;
 	prev?: { id: string; title: string };
 	next?: { id: string; title: string };
 };
 
-const { post, views, prev, next } = Astro.props;
+const { post, readingTime, prev, next } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BlogPost {...post.data} views={views} prev={prev} next={next}>
+<BlogPost
+	{...post.data}
+	readingTime={readingTime}
+	prev={prev}
+	next={next}
+>
 	<Content />
 </BlogPost>

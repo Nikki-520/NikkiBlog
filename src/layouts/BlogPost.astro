@@ -13,12 +13,12 @@ type Props = {
 	pubDate: Date;
 	heroImage?: import('astro').ImageMetadata;
 	category?: string;
-	views: number;
+	readingTime?: string;
 	prev?: PostNavItem;
 	next?: PostNavItem;
 };
 
-const { title, description, pubDate, heroImage, category, views, prev, next } = Astro.props;
+const { title, description, pubDate, heroImage, category, readingTime = '2 min', prev, next } = Astro.props;
 
 const splitTitle = (rawTitle: string) => {
 	const idx = rawTitle.includes('：') ? rawTitle.indexOf('：') : rawTitle.indexOf(':');
@@ -92,8 +92,8 @@ const normalizeCategory = (raw?: string) => {
 						<span class="text-xs font-semibold tracking-wider">{formattedDate}</span>
 					</div>
 					<div class="flex items-center gap-2.5">
-						<span class="material-symbols-outlined text-sm opacity-60">visibility</span>
-						<span class="text-xs font-semibold tracking-wider">访问量 {views}</span>
+						<span class="material-symbols-outlined text-sm opacity-60">schedule</span>
+						<span class="text-xs font-semibold tracking-wider">阅读时间 {readingTime}</span>
 					</div>
 				</div>
 			</div>
